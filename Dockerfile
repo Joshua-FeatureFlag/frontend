@@ -4,7 +4,7 @@
 # Start the service
 # make build
 # docker run -d -p 3000:3000 docker.io/library/frontend:local
-FROM node:current-alpine3.10
+FROM node:current-alpine3.18
 WORKDIR /app
 ADD package.json package-lock.json ./
 RUN npm install
