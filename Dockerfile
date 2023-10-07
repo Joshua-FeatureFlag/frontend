@@ -5,10 +5,10 @@
 # make build
 # docker run -d -p 3000:3000 docker.io/library/frontend:local
 FROM node:current-alpine3.10
-WORKDIR /srv
+WORKDIR /app
 ADD package.json package-lock.json ./
 RUN npm install
 ADD . .
 RUN npm run build
-EXPOSE 5000
+EXPOSE 3001
 CMD ["npm", "run", "start-prod"]
