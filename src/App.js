@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Sidebar.css';
 
@@ -27,15 +27,23 @@ function App() {
           onToggle={handleToggle}
           style={{ paddingLeft: '15px' }}
         >
-          <Navbar.Brand href="#home">Feature Flags</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: '60%' }}>
-            <Nav>
-              <Nav.Link as={Link} to="/item1">Notifications</Nav.Link>
-              <Nav.Link as={Link} to="/item2">Learning Center</Nav.Link>
-              <Nav.Link as={Link} to="/item3">Profile</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          <Container fluid>
+            <Row className="w-100">
+              <Col md={4}>
+                <Navbar.Brand href="#home">Feature Flags</Navbar.Brand>
+              </Col>
+              <Col md={{ span: 4, offset: 4 }}>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav>
+                    <Nav.Link as={Link} to="/item1">Notifications</Nav.Link>
+                    <Nav.Link as={Link} to="/item2">Learning Center</Nav.Link>
+                    <Nav.Link as={Link} to="/item3">Profile</Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Col>
+            </Row>
+          </Container>
         </Navbar>
         <Container fluid style={{ paddingTop: expanded ? '142px' : '56px' }}>
           <div className="d-flex">

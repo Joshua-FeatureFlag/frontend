@@ -1,7 +1,7 @@
 /* src/Sidebar.css */
 
 .sidebar {
-  width: 150px;
+  width: 175px;
   position: fixed;
   top: 56px;  /* Adjust this value to match the height of your top nav */
   left: 0;
@@ -24,11 +24,11 @@
 }
 
 .content-area {
-  padding-left: 150px;  /* Adjust this value to match the width of your sidebar */
+  padding-left: 175px;  /* Adjust this value to match the width of your sidebar */
 }
 
 @media (max-width: 991px) {
     .content-area {
-        padding-left: 150px;  /* Reset padding when the window is small */
+        padding-left: 175px;  /* Reset padding when the window is small */
     }
 }
