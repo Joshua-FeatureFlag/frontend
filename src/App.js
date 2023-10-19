@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Sidebar.css';
-import Item1 from './components/Item1/Item1.js';
-import Item2 from './components/Item2/Item2.js';
-import Item3 from './components/Item3/Item3.js';
+
+import Item1 from './components/item1/item1';
+import Item2 from './components/item2/item2';
+import Item3 from './components/item3/item3';
 
 function App() {
   return (
