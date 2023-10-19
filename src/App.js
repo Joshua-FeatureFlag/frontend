@@ -1,43 +1,47 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Sidebar.css';
+import Item1 from './components/Item1/Item1.js';
+import Item2 from './components/Item2/Item2.js';
+import Item3 from './components/Item3/Item3.js';
 
 function App() {
-  return  (
-    <div>
-      <Navbar bg="light" expand="lg" fixed="top" style={{ paddingLeft: '15px' }}>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-      <Container fluid>
-        <div className="d-flex">
-          <div className="sidebar">
-            <Nav className="flex-column">
-              <Nav.Link href="#item1">Item 1</Nav.Link>
-              <Nav.Link href="#item2">Item 2</Nav.Link>
-              <Nav.Link href="#item3">Item 3</Nav.Link>
+  return (
+    <Router>
+      <div>
+        <Navbar bg="light" expand="lg" fixed="top" style={{ paddingLeft: '15px' }}>
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link as={Link} to="/item1">Item 1</Nav.Link>
+              <Nav.Link as={Link} to="/item2">Item 2</Nav.Link>
+              <Nav.Link as={Link} to="/item3">Item 3</Nav.Link>
             </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Container fluid style={{ paddingTop: '56px' }}>
+          <div className="d-flex">
+            <div className="sidebar">
+              <Nav className="flex-column">
+                <Nav.Link as={Link} to="/item1">Item 1</Nav.Link>
+                <Nav.Link as={Link} to="/item2">Item 2</Nav.Link>
+                <Nav.Link as={Link} to="/item3">Item 3</Nav.Link>
+              </Nav>
+            </div>
+            <div className="flex-grow-1 p-3">
+              <Routes>
+                  <Route path="/item1" element={<Item1 />} />
+                  <Route path="/item2" element={<Item2 />} />
+                  <Route path="/item3" element={<Item3 />} />
+              </Routes>
+            </div>
           </div>
-          <div className="flex-grow-1 p-3">
-            {/* Your page content goes here */}
-          </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </Router>
   );
 }
 
