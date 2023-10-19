@@ -27,13 +27,13 @@ function App() {
           onToggle={handleToggle}
           style={{ paddingLeft: '15px' }}
         >
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="#home">Feature Flags</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/item1">Item 1</Nav.Link>
-              <Nav.Link as={Link} to="/item2">Item 2</Nav.Link>
-              <Nav.Link as={Link} to="/item3">Item 3</Nav.Link>
+          <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: '60%' }}>
+            <Nav>
+              <Nav.Link as={Link} to="/item1">Notifications</Nav.Link>
+              <Nav.Link as={Link} to="/item2">Learning Center</Nav.Link>
+              <Nav.Link as={Link} to="/item3">Profile</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -41,9 +41,9 @@ function App() {
           <div className="d-flex">
               <div className="sidebar" style={{ top: expanded ? '142px' : '56px' }}>
                 <Nav className="flex-column">
-                  <Nav.Link as={Link} to="/item1">Item 1</Nav.Link>
-                  <Nav.Link as={Link} to="/item2">Item 2</Nav.Link>
-                  <Nav.Link as={Link} to="/item3">Item 3</Nav.Link>
+                  <Nav.Link as={Link} to="/item1">Feature Flags</Nav.Link>
+                  <Nav.Link as={Link} to="/item2">Integrations</Nav.Link>
+                  <Nav.Link as={Link} to="/item3">Account Settings</Nav.Link>
                 </Nav>
             </div>
             <div className="flex-grow-1 p-3 content-area">
