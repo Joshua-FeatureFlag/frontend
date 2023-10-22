@@ -1,14 +1,46 @@
-# Exec into the container
-# docker run -it docker.io/library/3dfrontend:local /bin/sh
+FROM node:lts-alpine3.14 as build
 
-# Start the service
-# make build
-# docker run -d -p 3000:3000 docker.io/library/frontend:local
-FROM node:current-alpine3.18
+RUN apk update && \
+  apk upgrade && \
+  apk add --no-cache bash git openssh
+
+RUN mkdir /app
+
 WORKDIR /app
-ADD package.json package-lock.json ./
-RUN npm install
-ADD . .
-RUN npm run build
-EXPOSE 3001
-CMD ["npm", "run", "start-prod"]
+
+COPY package.json .
+
+RUN npm install -g --force npm@latest typescript@latest yarn@latest
+
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
+
+# ---------------
+
+FROM node:lts-alpine3.14
+
+RUN mkdir -p /app/build
+
+RUN apk update && \
+  apk upgrade && \
+  apk add git
+
+WORKDIR /app
+
+COPY --from=build /app/package.json .
+
+RUN yarn install --production
+
+COPY --from=build /app/build ./build
+COPY --from=build /app/src/auth_config.json ./src/auth_config.json
+COPY --from=build /app/server.js .
+
+EXPOSE 3000
+
+ENV SERVER_PORT=3000
+ENV NODE_ENV production
+
+CMD ["yarn", "prod"]

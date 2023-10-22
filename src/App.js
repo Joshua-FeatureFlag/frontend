@@ -1,73 +1,49 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Sidebar.css';
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import { Container } from "reactstrap";
 
-import Item1 from './components/item1/item1';
-import Item2 from './components/item2/item2';
-import Item3 from './components/item3/item3';
+import Loading from "./components/Loading";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Home from "./views/Home";
+import Profile from "./views/Profile";
+import ExternalApi from "./views/ExternalApi";
+import { useAuth0 } from "@auth0/auth0-react";
+import history from "./utils/history";
 
-function App() {
+// styles
+import "./App.css";
 
-  const [expanded, setExpanded] = useState(false);
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
 
-  const handleToggle = () => {
-    setExpanded(!expanded);
-  };
+const App = () => {
+  const { isLoading, error } = useAuth0();
+
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
-    <Router>
-      <div>
-      <Navbar
-          bg="light"
-          expand="lg"
-          fixed="top"
-          expanded={expanded}
-          onToggle={handleToggle}
-          style={{ paddingLeft: '15px' }}
-        >
-          <Container fluid>
-            <Row className="w-100">
-              <Col md={4}>
-                <Navbar.Brand href="#home">Feature Flags</Navbar.Brand>
-              </Col>
-              <Col md={{ span: 4, offset: 4 }}>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav>
-                    <Nav.Link as={Link} to="/item1">Notifications</Nav.Link>
-                    <Nav.Link as={Link} to="/item2">Learning Center</Nav.Link>
-                    <Nav.Link as={Link} to="/item3">Profile</Nav.Link>
-                  </Nav>
-                </Navbar.Collapse>
-              </Col>
-            </Row>
-          </Container>
-        </Navbar>
-        <Container fluid style={{ paddingTop: expanded ? '142px' : '56px' }}>
-          <div className="d-flex">
-              <div className="sidebar" style={{ top: expanded ? '142px' : '56px' }}>
-                <Nav className="flex-column">
-                  <Nav.Link as={Link} to="/item1">Feature Flags</Nav.Link>
-                  <Nav.Link as={Link} to="/item2">Integrations</Nav.Link>
-                  <Nav.Link as={Link} to="/item3">Account Settings</Nav.Link>
-                </Nav>
-            </div>
-            <div className="flex-grow-1 p-3 content-area">
-              <div className="content-area">
-                <Routes>
-                    <Route path="/item1" element={<Item1 />} />
-                    <Route path="/item2" element={<Item2 />} />
-                    <Route path="/item3" element={<Item3 />} />
-                </Routes>
-              </div>
-            </div>
-          </div>
+    <Router history={history}>
+      <div id="app" className="d-flex flex-column h-100">
+        <NavBar />
+        <Container className="flex-grow-1 mt-5">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/external-api" component={ExternalApi} />
+          </Switch>
         </Container>
+        <Footer />
       </div>
     </Router>
   );
-}
+};
 
 export default App;
